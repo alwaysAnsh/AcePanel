@@ -9,7 +9,11 @@ import { useUserRole } from "@/hooks/useUserRole";
 function DasboardBtn() {
   const { isCandidate, isLoading } = useUserRole();
 
-  if (isCandidate || isLoading) return null;
+  if (isCandidate || isLoading) 
+  {
+    console.log("candidate: ", isCandidate)
+    return null;
+  }
 
   return (
     <Link href={"/dashboard"}>
