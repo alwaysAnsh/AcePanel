@@ -7,13 +7,37 @@ import { CalendarIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import useMeetingActions from "@/hooks/useMeetingActions";
+import { useEffect, useState } from "react";
 
 type Interview = Doc<"interviews">;
 
 function MeetingCard({ interview }: { interview: Interview }) {
   const { joinMeeting } = useMeetingActions();
+  const [status, setStatus] = useState(getMeetingStatus(interview))
+  
 
-  const status = getMeetingStatus(interview);
+
+  useEffect(() => {
+    console.log("use effect is called")
+    if (status === "live" || status === "completed") return;
+
+    debugger
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const interviewTime = new Date(interview.startTime);
+
+      if (now >= interviewTime) {
+        setStatus("live");
+        clearInterval(interval);
+      }
+    }, 50000);
+
+    return () => clearInterval(interval);
+  });
+
+
+  // const status = getMeetingStatus(interview);
   const formattedDate = format(new Date(interview.startTime), "EEEE, MMMM d · h:mm a");
 
   return (
