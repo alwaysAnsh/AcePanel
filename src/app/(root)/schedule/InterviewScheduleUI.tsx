@@ -34,6 +34,13 @@ function InterviewScheduleUI() {
   const [isCreating, setIsCreating] = useState(false);
 
   const interviews = useQuery(api.interviews.getAllInterviews) ?? [];
+  console.log("interviews list: ", interviews)
+  console.log("user id: ", user)
+  // const FilteredInterviews = interviews.filter((obj) => obj.interviewerIds.includes(user?.id) )
+  const FilteredInterviews = interviews.filter(
+  (obj) => obj.interviewerIds.some(id => id === user?.id)
+);
+
   const users = useQuery(api.users.getUsers) ?? [];
   const createInterview = useMutation(api.interviews.createInterview);
 
@@ -288,14 +295,14 @@ function InterviewScheduleUI() {
       </div>
 
       {/* LOADING STATE & MEETING CARDS */}
-      {!interviews ? (
+      {!FilteredInterviews ? (
         <div className="flex justify-center py-12">
           <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
         </div>
-      ) : interviews.length > 0 ? (
+      ) : FilteredInterviews.length > 0 ? (
         <div className="spacey-4">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {interviews.map((interview) => (
+            {FilteredInterviews.map((interview) => (
               <MeetingCard key={interview._id} interview={interview} />
             ))}
           </div>

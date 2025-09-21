@@ -1,12 +1,21 @@
+"use client"
+
 import Link from "next/link";
 
 import { CodeIcon } from "lucide-react";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import DasboardBtn from "./DashboardBtn";
 import { ModeToggle } from "./ModeToggle";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 
 function Navbar() {
+  const { user, isLoaded } = useUser();
+  const dbUser = useQuery(api.users.getUserByClerkId, {
+      clerkId: user?.id || "",
+    });
+
   return (
     <nav className="border-b">
       <div className="flex h-16 items-center px-4 container mx-auto">
@@ -24,9 +33,9 @@ function Navbar() {
         {/* RIGHT SIDE - ACTIONS */}
         <SignedIn>
           <div className="flex items-center space-x-4 ml-auto">
-            <DasboardBtn />
+            {dbUser?.role ?<DasboardBtn /> : <div></div>}
             <ModeToggle />
-            <UserButton />
+            {dbUser?.role ? <UserButton /> : <div></div>}
           </div>
         </SignedIn>
       </div>

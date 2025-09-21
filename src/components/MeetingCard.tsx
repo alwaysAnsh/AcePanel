@@ -8,12 +8,14 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import useMeetingActions from "@/hooks/useMeetingActions";
 import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 type Interview = Doc<"interviews">;
 
 function MeetingCard({ interview }: { interview: Interview }) {
   const { joinMeeting } = useMeetingActions();
   const [status, setStatus] = useState(getMeetingStatus(interview))
+  const { user } = useUser();
   
 
 
@@ -77,6 +79,16 @@ function MeetingCard({ interview }: { interview: Interview }) {
             Waiting to Start
           </Button>
         )}
+        <div className="mt-5 w-fit flex items-center space-x-2   py-1 shadow ">
+  <img
+    src={user?.imageUrl}
+    
+    className="w-8 h-8 rounded-full object-cover border"
+  />
+  <span className="font-medium ">
+    Interviewer: {user?.fullName?.split(" ")[0]}
+  </span>
+</div>
       </CardContent>
     </Card>
   );
