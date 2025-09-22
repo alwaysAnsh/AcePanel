@@ -68,3 +68,28 @@ export const updateInterviewStatus = mutation({
     });
   },
 });
+
+// export const deleteInterview = mutation(async ({ db }, id: any) => {
+//   await db.delete(id);
+// });
+
+export const deleteInterview = mutation({
+  args: { id: v.id("interviews") }, 
+  handler: async ({ db, auth }, args) => {
+    const identity = await auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const interview = await db.get(args.id);
+    if (!interview) throw new Error("Interview not found");
+
+    // ✅ Check if user is candidate or one of the interviewers
+    const isCandidate = interview.candidateId === identity.subject;
+    const isInterviewer = interview.interviewerIds.includes(identity.subject);
+
+    if (!isCandidate && !isInterviewer) {
+      throw new Error("Not allowed to delete this interview");
+    }
+
+    await db.delete(args.id);
+  },
+});

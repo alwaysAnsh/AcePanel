@@ -9,18 +9,26 @@ import { Button } from "./ui/button";
 import useMeetingActions from "@/hooks/useMeetingActions";
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 type Interview = Doc<"interviews">;
 
 function MeetingCard({ interview }: { interview: Interview }) {
   const { joinMeeting } = useMeetingActions();
   const [status, setStatus] = useState(getMeetingStatus(interview))
+  const [interviews, setInterviews] = useState([])
+
   const { user } = useUser();
   
+  const users = useQuery(api.users.getUsers) ?? [];
+  console.log("interview: ", interview)
 
+  
+  const deleteInterview = useMutation(api.interviews.deleteInterview);
 
   useEffect(() => {
-    console.log("use effect is called")
+    //console.log("use effect is called")
     if (status === "live" || status === "completed") return;
 
     debugger
@@ -79,16 +87,35 @@ function MeetingCard({ interview }: { interview: Interview }) {
             Waiting to Start
           </Button>
         )}
-        <div className="mt-5 w-fit flex items-center space-x-2   py-1 shadow ">
-  <img
-    src={user?.imageUrl}
-    
-    className="w-8 h-8 rounded-full object-cover border"
-  />
-  <span className="font-medium ">
-    Interviewer: {user?.fullName?.split(" ")[0]}
-  </span>
-</div>
+        {(() => {
+  const interviewers = users
+    .filter(u => !(user?.id === u?.clerkId && u?.role === "candidate")) // keep only interviewers
+    .map(u => u?.name?.split(" ")[0]); // extract first names
+
+  return interviewers.length > 0 && (
+    <div className="mt-5 w-fit flex items-center space-x-2 py-1 shadow">
+      {/* <img
+        // src={user?.image}
+        className="w-8 h-8 rounded-full object-cover border"
+        alt="interviewer"
+      /> */}
+      <span className="font-medium text-gray-200">
+        Interviewer: {interviewers.join(", ")}
+      </span>
+    </div>
+  );
+})()}
+
+<Button
+  variant="destructive"
+  onClick={() => {
+    deleteInterview({ id: interview._id }); // ✅ pass Convex doc id
+  }}
+>
+  Delete
+</Button>
+
+
       </CardContent>
     </Card>
   );
