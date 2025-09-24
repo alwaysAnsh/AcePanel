@@ -6,6 +6,8 @@ import { Doc, Id } from "../../../../convex/_generated/dataModel";
 import toast from "react-hot-toast";
 import LoaderUI from "@/components/LoaderUI";
 import { getCandidateInfo, groupInterviews } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { INTERVIEW_CATEGORY } from "@/constants";
@@ -22,6 +24,7 @@ function DashboardPage() {
   const users = useQuery(api.users.getUsers);
   const interviews = useQuery(api.interviews.getAllInterviews);
   const updateStatus = useMutation(api.interviews.updateInterviewStatus);
+  const { user } = useUser();
 
   const handleStatusUpdate = async (interviewId: Id<"interviews">, status: string) => {
     try {
@@ -34,7 +37,10 @@ function DashboardPage() {
 
   if (!interviews || !users) return <LoaderUI />;
 
-  const groupedInterviews = groupInterviews(interviews);
+  let groupedInterviews = groupInterviews(interviews);
+  // console.log("groupedINterviewas: ", groupedInterviews)
+  // debugger
+  groupedInterviews.completed = groupedInterviews?.completed.filter((int:any) => user?.id == int.candidateId )
 
   return (
     <div className="container mx-auto py-10">
