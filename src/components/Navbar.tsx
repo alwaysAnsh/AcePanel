@@ -11,7 +11,8 @@ import { api } from "../../convex/_generated/api";
 
 
 function Navbar() {
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
+  // const {isLoaded} = useUser();
   const dbUser = useQuery(api.users.getUserByClerkId, {
       clerkId: user?.id || "",
     });

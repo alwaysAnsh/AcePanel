@@ -11,22 +11,25 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
 
   const call = useCall();
 
-  debugger
+  // debugger
 
-  if (!call) return null;
 
   useEffect(() => {
+     if (!call) return ;
+    if(call?.camera){
     if (isCameraDisabled) call.camera.disable();
-    else call.camera.enable();
-  }, [isCameraDisabled, call.camera]);
+    else call.camera.enable();}
+  }, [isCameraDisabled,call]);
 
   useEffect(() => {
+    if (!call) return ;
+    if(call?.microphone){
     if (isMicDisabled) call.microphone.disable();
-    else call.microphone.enable();
-  }, [isMicDisabled, call.microphone]);
+    else call.microphone.enable();}
+  }, [isMicDisabled,call]);
 
   const handleJoin = async () => {
-    await call.join();
+    await call?.join();
     onSetupComplete();
   };
 
@@ -56,7 +59,7 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
               {/* MEETING DETAILS  */}
               <div>
                 <h2 className="text-xl font-semibold mb-1">Meeting Details</h2>
-                <p className="text-sm text-muted-foreground break-all">{call.id}</p>
+                <p className="text-sm text-muted-foreground break-all">{call?.id}</p>
               </div>
 
               <div className="flex-1 flex flex-col justify-between">

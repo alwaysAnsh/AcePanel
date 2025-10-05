@@ -17,7 +17,7 @@ type Interview = Doc<"interviews">;
 function MeetingCard({ interview }: { interview: Interview }) {
   const { joinMeeting } = useMeetingActions();
   const [status, setStatus] = useState(getMeetingStatus(interview))
-  const [interviews, setInterviews] = useState([])
+  // const [interviews, setInterviews] = useState([])
 
   const { user } = useUser();
   

@@ -24,20 +24,20 @@
 
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+//import localFont from "next/font/local";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
-import { RedirectToSignIn, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
 import Navbar from "@/components/Navbar";
 // import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
-import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { useEffect } from "react";
+// import { useRouter } from "next/router";
+// import { usePathname } from "next/navigation";
+// import { useQuery } from "convex/react";
+// import { api } from "../../convex/_generated/api";
+// import { useEffect } from "react";
 import RoleGate from "@/components/guards/RoleGate";
 
 // const geistSans = localFont({

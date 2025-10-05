@@ -31,16 +31,17 @@ function DashboardPage() {
       await updateStatus({ id: interviewId, status });
       toast.success(`Interview marked as ${status}`);
     } catch (error) {
+      console.log("error updating status: ",error)
       toast.error("Failed to update status");
     }
   };
 
   if (!interviews || !users) return <LoaderUI />;
 
-  let groupedInterviews = groupInterviews(interviews);
+  const groupedInterviews = groupInterviews(interviews);
   // console.log("groupedINterviewas: ", groupedInterviews)
   // debugger
-  groupedInterviews.completed = groupedInterviews?.completed.filter((int:any) => user?.id == int.candidateId )
+  groupedInterviews.completed = groupedInterviews?.completed?.filter((int:Interview) => user?.id == int.candidateId )
 
   return (
     <div className="container mx-auto py-10">
@@ -67,7 +68,7 @@ function DashboardPage() {
                     const startTime = new Date(interview.startTime);
 
                     return (
-                      <Card className="hover:shadow-md transition-all">
+                      <Card className="hover:shadow-md transition-all" key={category.id}>
                         {/* CANDIDATE INFO */}
                         <CardHeader className="p-4">
                           <div className="flex items-center gap-3">

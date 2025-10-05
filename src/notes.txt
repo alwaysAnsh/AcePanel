@@ -1,0 +1,14 @@
+what still have to be done -- enhancementss
+
+recording chalu krne par koi succes ya fail ka toast aana 
+interviewscheduleUI ek bahut badi file hai, isko soch samajh ke commit krna
+refresh krne pe naya page aana chaiye
+login ya signup krne par role kya hoga ye toh pucha hi nahi
+agar ek baar select role wala trigger ho gaya toh back krne pe woh path nhi aana chaiye
+meeting created hone par meeting generate krne mein time leta hai . iska time kam karna hai
+calendar mein date ki range set krni hai aur time ki bhi
+trigger bhi krna hai jese hi scheduled interview ka time match kr jae real time se. refresh krne ki zarurat nhi pade
+delete a interview bhi hona chaiye
+
+useCall -> to get value of current useCall
+useGetCalls -> to get all the calls

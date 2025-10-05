@@ -9,6 +9,8 @@ export function cn(...inputs: ClassValue[]) {
 
 type Interview = Doc<"interviews">;
 type User = Doc<"users">;
+type GroupedInterviews = Record<string, Interview[]>;
+
 
 
 export const getInterviewerInfo = (users: User[], interviewerId: string) => {
@@ -27,7 +29,8 @@ export const getInterviewerInfo = (users: User[], interviewerId: string) => {
 export const groupInterviews = (interviews: Interview[]) => {
   if (!interviews) return {};
 
-  return interviews.reduce((acc: any, interview: Interview) => {
+  return interviews.reduce((acc: GroupedInterviews, interview: Interview) => {
+    console.log("acc",acc)
     const date = new Date(interview.startTime);
     const now = new Date();
 
