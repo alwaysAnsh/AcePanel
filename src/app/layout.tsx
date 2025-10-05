@@ -39,6 +39,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 // import { api } from "../../convex/_generated/api";
 // import { useEffect } from "react";
 import RoleGate from "@/components/guards/RoleGate";
+import 'tw-animate-css';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
