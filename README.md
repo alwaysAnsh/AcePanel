@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Intervuex – AI-Powered Interview Platform
+
+Intervuex is a platform for scheduling, managing, and recording interviews. It is built with Next.js, TailwindCSS, and Convex, and provides a seamless experience for both candidates and interviewers.
 
 ## Getting Started
 
-First, run the development server:
+First, clone the repository and install dependencies:
 
-```bash
+git clone <repo_url>
+cd intervuex
+npm install
+
+
+## Start the development server:
+
+npx next dev
+# or
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open http://localhost:3000
+ in your browser to see the app. The page will auto-update as you edit files.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
+
+Schedule interviews with candidates and interviewers.
+
+Create, view, and delete interviews (only creator can delete).
+
+Track interview status: upcoming, live, completed.
+
+Join live meetings and record sessions.
+
+Display first names of interviewers; multiple interviewers separated by commas.
+
+## Tech Stack
+
+Frontend: Next.js (App Router), React, TailwindCSS v4, TypeScript
+
+Backend: Convex (Serverless DB + Functions)
+
+Authentication: Clerk (candidate/interviewer roles)
+
+Deployment: Vercel
+
+Environment Variables
+
+Create a .env file in the root with:
+
+CLERK_FRONTEND_API=<your-clerk-frontend-api>
+CONVEX_URL=<your-convex-deployment-url>
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+## Notes
+
+Only the interview creator can delete meetings.
+
+Meeting status auto-updates based on startTime.
+
+For support or questions, contact: anshj9y@gmail.com
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Next.js Documentation
+ – learn about Next.js features.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+TailwindCSS Documentation
+ – learn about styling utilities.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Clerk Documentation
+ – learn about authentication and roles.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Convex Documentation
+ – learn about serverless database and functions.
