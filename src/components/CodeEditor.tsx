@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { AlertCircleIcon, BookIcon, LightbulbIcon } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import Image from "next/image";
+import { IoLogoJavascript } from "react-icons/io5";
 
 function CodeEditor() {
   const [selectedQuestion, setSelectedQuestion] = useState(CODING_QUESTIONS[0]);
@@ -63,6 +64,8 @@ function CodeEditor() {
                       <SelectValue>
                         <div className="flex items-center gap-2">
                           <Image
+                            width={20}
+                            height={10}
                             src={`/${language}.png`}
                             alt={language}
                             className="w-5 h-5 object-contain"
@@ -77,6 +80,8 @@ function CodeEditor() {
                         <SelectItem key={lang.id} value={lang.id}>
                           <div className="flex items-center gap-2">
                             <Image
+                              width={20}
+                              height={10}
                               src={`/${lang.id}.png`}
                               alt={lang.name}
                               className="w-5 h-5 object-contain"
