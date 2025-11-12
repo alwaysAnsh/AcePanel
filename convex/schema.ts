@@ -39,4 +39,12 @@ export default defineSchema({
     interviewerId: v.string(),
     interviewId: v.id("interviews"),
   }).index("by_interview_id", ["interviewId"]),
+
+  interviewCalls: defineTable({
+    userId: v.string(),
+    callId: v.string(),
+    status: v.string(),
+    startedAt: v.string(),
+    endedAt: v.optional(v.string()),
+  }),
 });

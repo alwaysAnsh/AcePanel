@@ -46,9 +46,12 @@ import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 import ActionCard from "@/components/ActionCard";
 import LoaderUI from "@/components/LoaderUI";
+import VapiInterviewWidget from "@/components/VapiInterviewWidget";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
   const router = useRouter();
+  const { user } = useUser();
 
   const { isInterviewer, isLoading } = useUserRole();
   const interviews = useQuery(api.interviews.getMyInterviews);
@@ -131,6 +134,12 @@ export default function Home() {
           </div>
         </>
       )}
+      <main className="h-screen flex items-center justify-center">
+      <VapiInterviewWidget
+        userId={user.id} // replace with logged-in user's id
+        userName={user.fullName}
+      />
+    </main>
     </div>
   );
 }

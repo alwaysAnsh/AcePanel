@@ -40,6 +40,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 // import { useEffect } from "react";
 import RoleGate from "@/components/guards/RoleGate";
 import 'tw-animate-css';
+import FAQChat from "@/components/FAQChat";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -83,6 +84,8 @@ export default function RootLayout({
                 <main className="px-4 sm:px-6 lg:px-8">
                     <RoleGate>{children}</RoleGate> {/* 👈 add this wrapper */}
                 </main>
+                <FAQChat/>
+                
               </div>
             </SignedIn>
 
