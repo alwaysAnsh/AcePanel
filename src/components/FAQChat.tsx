@@ -47,6 +47,7 @@ export default function FAQChat() {
         data = await res.json();
       } catch (e) {
         const txt = await res.text().catch(() => "");
+        console.error(e)
         safePush({ sender: "bot", text: `Invalid response: ${txt || "no body"}` });
         return;
       }

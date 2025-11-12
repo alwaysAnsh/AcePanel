@@ -206,7 +206,7 @@ function InterviewPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
-  const userName = searchParams.get("userName");
+  // const userName = searchParams.get("userName");
 
   const [vapi, setVapi] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -318,6 +318,8 @@ const initTimeout = setTimeout(async () => {
   const startCall = async (vapiInstance: any, userName: string) => {
     if (hasStartedCall.current) {
       console.log("Call already started, skipping...");
+      console.log("username passed: ", userName);
+      
       return;
     }
 

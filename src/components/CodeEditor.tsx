@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { AlertCircleIcon, BookIcon, LightbulbIcon } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import Image from "next/image";
-import { IoLogoJavascript } from "react-icons/io5";
+
 
 function CodeEditor() {
   const [selectedQuestion, setSelectedQuestion] = useState(CODING_QUESTIONS[0]);
