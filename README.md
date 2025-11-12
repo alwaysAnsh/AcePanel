@@ -1,4 +1,4 @@
-## Intervuex – AI-Powered Interview Platform
+## ApexInterview – AI-Powered Interview Platform
 
 Intervuex is a platform for scheduling, managing, and recording interviews. It is built with Next.js, TailwindCSS, and Convex, and provides a seamless experience for both candidates and interviewers.
 
