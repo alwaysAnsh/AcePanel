@@ -46,7 +46,7 @@ function MeetingModal({ isOpen, onClose, title, isJoinMeeting }: MeetingModalPro
 
           <div className="flex justify-end gap-3">
             <Button variant="outline" onClick={onClose}>
-              Cancel
+              Cancell
             </Button>
             <Button onClick={handleStart} disabled={isJoinMeeting && !meetingUrl.trim()}>
               {isJoinMeeting ? "Join Meeting" : "Start Meeting"}
